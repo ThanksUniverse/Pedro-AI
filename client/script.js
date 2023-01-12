@@ -10,7 +10,7 @@ let loadInterval;
 let storedName = localStorage.getItem("name");
 let yourName
 console.log(storedName)
-if (storedName !== 'null' || !storedName || storedName === null) {
+if (storedName !== 'null' && storedName !== null) {
   yourName = localStorage.getItem("name")
 } else {
   yourName = window.prompt("Whats your name ?")
@@ -56,8 +56,6 @@ function chatStripe(isAi, value, uniqueId) {
   console.log(yourName);
   if (yourName == undefined) {
     yourName = "User"
-    yourName = window.prompt("Whats your name ?")
-    localStorage.setItem("name", yourName);
   }
 	return `
       <div class="wrapper ${isAi && "ai"}">
