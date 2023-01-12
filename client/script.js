@@ -10,8 +10,7 @@ let loadInterval;
 let storedName = localStorage.getItem("name");
 let yourName
 console.log(storedName)
-if (storedName !== 'null') {
-  console.log("Here")
+if (storedName !== 'null' || !storedName || storedName === null) {
   yourName = localStorage.getItem("name")
 } else {
   yourName = window.prompt("Whats your name ?")
