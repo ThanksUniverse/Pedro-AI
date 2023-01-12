@@ -56,6 +56,8 @@ function chatStripe(isAi, value, uniqueId) {
   console.log(yourName);
   if (yourName == undefined) {
     yourName = "User"
+    yourName = window.prompt("Whats your name ?")
+    localStorage.setItem("name", yourName);
   }
 	return `
       <div class="wrapper ${isAi && "ai"}">
