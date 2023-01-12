@@ -67,7 +67,7 @@ body {
 .profile {
   width: 36px;
   height: 36px;
-  border-radius: 5px;
+  border-radius: 50%;
 
   background: #5436DA;
 
@@ -81,9 +81,10 @@ body {
 }
 
 .profile img {
-  width: 60%;
-  height: 60%;
+  width: 130%;
+  height: 130%;
   object-fit: contain;
+  border-radius: 100%;
 }
 
 .message {

@@ -1,10 +1,23 @@
-import bot from "./assets/bot.svg";
-import user from "./assets/user.svg";
+import bot from "./assets/bot.jpeg";
+import user from "./assets/user.jpg";
 
 const form = document.querySelector("form");
 const chatContainer = document.querySelector("#chat_container");
 
 let loadInterval;
+
+
+let storedName = localStorage.getItem("name");
+let yourName
+console.log(storedName)
+if (storedName !== 'null') {
+  console.log("Here")
+  yourName = localStorage.getItem("name")
+} else {
+  yourName = window.prompt("Whats your name ?")
+  localStorage.setItem("name", yourName);
+  console.log(yourName)
+}
 
 // Load the bot message
 function loader(element) {
@@ -41,24 +54,34 @@ function generateUniqueId() {
 
 // Lines in chat based if is or not the bot message
 function chatStripe(isAi, value, uniqueId) {
+  console.log(yourName);
+  if (yourName == undefined) {
+    yourName = "User"
+  }
 	return `
       <div class="wrapper ${isAi && "ai"}">
           <div class="chat">
               <div class="profile">
                   <img 
-                    src=${isAi ? bot : user} 
-                    alt="${isAi ? "bot" : "user"}" 
-                  />
+              src="${isAi ? bot : user}"
+              alt="${isAi ? "bot" : "user"}"
+              />
               </div>
+                <p style="color:white; font-size: 20px; font-weight: 600">${isAi ? "Pedro IA" : yourName}</p>
               <div class="message" id=${uniqueId}>${value}</div>
           </div>
       </div>
   `;
 }
 
+let waitingResults = 0;
 // Handle the message sent
 const handleSubmit = async (e) => {
 	e.preventDefault();
+  if (waitingResults === 1) {
+    return
+  }
+  waitingResults = 1;
 
 	const data = new FormData(form);
 
@@ -99,11 +122,15 @@ const handleSubmit = async (e) => {
     console.log({parsedData})
 
 		typeText(messageDiv, parsedData);
+
+    waitingResults = 0;
 	} else {
 		const err = await response.text();
 
 		messageDiv.innerHTML = "Something went wrong";
 		alert(err);
+
+    waitingResults = 0;
 	}
 };
 
