@@ -12,6 +12,9 @@ if (storedName !== "null" && storedName !== null) {
 	yourName = localStorage.getItem("name");
 } else {
 	yourName = window.prompt("Whats your name ?");
+  if (yourName === "") {
+    yourName = "User";
+  }
 	localStorage.setItem("name", yourName);
 }
 
@@ -24,8 +27,21 @@ if (storedProfile !== "null" && storedProfile !== null) {
 	yourProfile = "/assets/user.svg";
 }
 
+let storedMessages = localStorage.getItem("messages");
+let yourMessages;
+if (storedMessages !== "null" && storedMessages !== null) {
+  yourMessages = localStorage.getItem("messages");
+} else {
+  yourMessages = 0;
+}
+
 let userName = document.getElementById('yourUsername')
 userName.innerHTML = yourName;
+let messagesCount = document.getElementById('messagesCount')
+let messageCountNumber = parseInt(yourMessages);
+messagesCount.innerHTML = yourMessages
+
+
 
 // Load the bot message
 function loader(element) {
@@ -71,7 +87,7 @@ function chatStripe(isAi, value, uniqueId) {
 	}
 	console.log(yourProfile);
 	return `
-      <div class="wrapper ${isAi && "ai"}">
+      <div style="border-radius: 20px; margin-top: 5px; width: 80%" class="wrapper ${isAi ? "ai" : "user"}">
           <div class="chat">
               <div class="profile">
                   <img 
@@ -79,7 +95,7 @@ function chatStripe(isAi, value, uniqueId) {
               alt="${isAi ? "bot" : "user"}"
               />
               </div>
-                <p style="color:white; font-size: 20px; font-weight: 600">${isAi ? "Pedro IA" : yourName}</p>
+                <p style="color:white; font-size: 20px; font-weight: 600">${isAi ? "Pedro IA:" : yourName + ":"}</p>
               <div class="message" id=${uniqueId}>${value}</div>
           </div>
       </div>
@@ -90,6 +106,9 @@ let waitingResults = 0;
 // Handle the message sent
 const handleSubmit = async (e) => {
 	e.preventDefault();
+  messageCountNumber += 1;
+  messagesCount.innerHTML = messageCountNumber;
+  localStorage.setItem("messages", messageCountNumber)
 	if (waitingResults === 1) {
 		return;
 	}
@@ -176,3 +195,10 @@ profilePicture.addEventListener("click", function () {
 		alert("Please enter a valid image URL"); // Alert user if invalid URL is entered
 	}
 });
+
+const showedUserName = document.getElementById("yourUsername");
+  showedUserName.addEventListener('click', function() {
+    let newName = localStorage.setItem("name", prompt("Whats your username ?"))
+    yourName = localStorage.getItem("name");
+    userName.innerHTML = localStorage.getItem("name");
+  })
