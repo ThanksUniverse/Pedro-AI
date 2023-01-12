@@ -11,10 +11,15 @@
 
 <body>
   <div id="app">
-    <h1 style="font-size: 40px; color: white; text-align: center; background-color: #40414f; max-width: 60%; margin: auto; border-radius: 5%;">Pedro IA</h1>
+    <div class="titleAndImage" style="width: 100%;">
+      <input type="image" alt="Profile" id="profile_picture" src="assets/user.svg" style="float:left; margin-top:0px; margin-left:0px; height: 45px; background-color: rgba(0, 0, 0, 0.5); border-radius: 50%;">
+      <p style="float:left; color: white;">Username: <span id="yourUsername"></span>
+      </p>
+      <h1 style="font-size: 40px; color: white; text-align: center; background-color: #40414f;">Pedro IA</h1>
+    </div>
     <div id="chat_container"></div>
-    <form>
-      <textarea name="prompt" rows="1" cols="1" placeholder="Ask Pedro..."></textarea>
+    <form style="margin-bottom: 30px;">
+      <textarea id="placeIWrite" name="prompt" rows="1" cols="1" placeholder="Ask Pedro..."></textarea>
       <button type="submit">><img src="assets/send.svg" alt="Send"></button>
     </form>
   </div>

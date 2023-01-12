@@ -53,6 +53,10 @@ body {
   background: #40414F;
 }
 
+#profile_picture:hover {
+  cursor: pointer;
+}
+
 .chat {
   width: 100%;
   max-width: 1280px;
@@ -131,9 +135,9 @@ textarea {
   color: #fff;
   font-size: 18px;
 
-  padding: 10px;
+  padding: 15px;
   background: transparent;
-  border-radius: 5px;
+  border-radius: 15px;
   border: none;
   outline: none;
 }
