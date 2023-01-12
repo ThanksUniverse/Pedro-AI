@@ -1,5 +1,5 @@
 import bot from "./assets/bot.jpeg";
-import user from "./assets/user.jpg";
+import user from "./assets/user.svg";
 
 const form = document.querySelector("form");
 const chatContainer = document.querySelector("#chat_container");
@@ -24,7 +24,7 @@ console.log(storedProfile);
 if (storedProfile !== "null" && storedProfile !== null) {
 	yourProfile = localStorage.getItem("profile");
 } else {
-	yourProfile = "/assets/user.svg";
+	yourProfile = user;
 }
 
 let storedMessages = localStorage.getItem("messages");
